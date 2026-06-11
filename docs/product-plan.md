@@ -16,4 +16,4 @@ Carbon Compass AI helps users understand the environmental impact of their food 
 - Carbon Impact Dashboard
 - Personalized Recommendations
 - Progress Tracking
-- Achievement System
+
