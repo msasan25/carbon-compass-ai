@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import Button from "../components/Button";
 
 function UploadMeal() {
-    const [fileName, setFileName] = useState("No file selected");
+    const [mealName, setMealName] = useState("");
     const [imageUrl, setImageUrl] = useState(null);
     const [impact, setImpact] = useState(null);
 
@@ -11,14 +10,29 @@ function UploadMeal() {
         const file = event.target.files[0];
 
         if (file) {
-            setFileName(file.name);
             setImageUrl(URL.createObjectURL(file));
+        }
+    };
 
-            // Mock AI result
-            setImpact({
-                carbon: "4.2 kg CO₂",
-                recommendation: "Try a plant-based meal once this week."
-            });
+    const analyzeMeal = async () => {
+        try {
+            const response = await fetch(
+                "http://localhost:5000/analyze-meal",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        mealName,
+                    }),
+                }
+            );
+
+            const data = await response.json();
+            setImpact(data);
+        } catch (error) {
+            console.error("Error analyzing meal:", error);
         }
     };
 
@@ -32,10 +46,6 @@ function UploadMeal() {
                 onChange={handleFileChange}
             />
 
-            <p style={{ marginTop: "15px" }}>
-                Selected file: {fileName}
-            </p>
-
             {imageUrl && (
                 <div style={{ marginTop: "20px" }}>
                     <img
@@ -44,23 +54,34 @@ function UploadMeal() {
                         style={{
                             maxWidth: "300px",
                             borderRadius: "10px",
-                            border: "1px solid #ddd"
                         }}
                     />
                 </div>
             )}
 
+            <div style={{ marginTop: "20px" }}>
+                <input
+                    type="text"
+                    placeholder="Enter meal name"
+                    value={mealName}
+                    onChange={(e) => setMealName(e.target.value)}
+                />
+            </div>
+
+            <div style={{ marginTop: "20px" }}>
+                <Button
+                    text="Analyze Meal"
+                    onClick={analyzeMeal}
+                />
+            </div>
+
             {impact && (
-                <div
-                    style={{
-                        marginTop: "20px",
-                        padding: "20px",
-                        border: "1px solid #ddd",
-                        borderRadius: "10px",
-                        maxWidth: "400px"
-                    }}
-                >
+                <div style={{ marginTop: "20px" }}>
                     <h3>Estimated Impact</h3>
+
+                    <p>
+                        <strong>Meal:</strong> {impact.meal}
+                    </p>
 
                     <p>
                         <strong>Carbon Footprint:</strong> {impact.carbon}
@@ -71,12 +92,6 @@ function UploadMeal() {
                     </p>
                 </div>
             )}
-
-            <div style={{ marginTop: "20px" }}>
-                <Link to="/progress">
-                    <Button text="View Progress" />
-                </Link>
-            </div>
         </div>
     );
 }

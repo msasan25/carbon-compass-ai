@@ -1,6 +1,6 @@
-function Button({ text }) {
+function Button({ text, onClick }) {
     return (
-        <button style={buttonStyle}>
+        <button style={buttonStyle} onClick={onClick}>
             {text}
         </button>
     );
@@ -11,7 +11,7 @@ const buttonStyle = {
     fontSize: "16px",
     cursor: "pointer",
     borderRadius: "8px",
-    border: "none"
+    border: "none",
 };
 
 export default Button;
