@@ -1,36 +1,55 @@
+import Card from "../components/Card";
+
 function Dashboard() {
     return (
-        <div style={{ padding: "20px" }}>
-            <h1>Dashboard</h1>
+        <div style={container}>
+            <h1 style={title}>Dashboard</h1>
 
-            <div style={{ display: "flex", gap: "20px", marginTop: "20px" }}>
+            <p style={subtitle}>
+                Track your carbon impact at a glance
+            </p>
 
-                <div style={cardStyle}>
-                    <h3>Food Impact</h3>
-                    <p>Track your meal emissions</p>
-                </div>
+            <div style={grid}>
+                <Card
+                    emoji="🍽"
+                    title="Food Impact"
+                    description="Monitor emissions from your meals"
+                />
 
-                <div style={cardStyle}>
-                    <h3>Transport Impact</h3>
-                    <p>Monitor travel footprint</p>
-                </div>
+                <Card
+                    emoji="🚗"
+                    title="Transport Impact"
+                    description="Track travel-related carbon footprint"
+                />
 
-                <div style={cardStyle}>
-                    <h3>Weekly Challenge</h3>
-                    <p>Improve your carbon score</p>
-                </div>
-
+                <Card
+                    emoji="📈"
+                    title="Weekly Challenge"
+                    description="Improve your sustainability score"
+                />
             </div>
         </div>
     );
 }
 
-const cardStyle = {
-    padding: "20px",
-    border: "1px solid #ddd",
-    borderRadius: "10px",
-    width: "200px",
-    boxShadow: "0 2px 6px rgba(0,0,0,0.1)"
+const container = {
+    padding: "40px",
+    fontFamily: "Arial"
+};
+
+const title = {
+    fontSize: "40px",
+    marginBottom: "10px"
+};
+
+const subtitle = {
+    color: "#555",
+    marginBottom: "30px"
+};
+
+const grid = {
+    display: "flex",
+    gap: "20px"
 };
 
 export default Dashboard;
