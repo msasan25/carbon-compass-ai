@@ -1,4 +1,7 @@
+import { Link } from "react-router-dom";
+import Button from "../components/Button";
 import Card from "../components/Card";
+
 
 function Dashboard() {
     return (
@@ -27,6 +30,11 @@ function Dashboard() {
                     title="Weekly Challenge"
                     description="Improve your sustainability score"
                 />
+                <div style={{ marginTop: "30px" }}>
+                    <Link to="/upload">
+                        <Button text="Upload Meal" />
+                    </Link>
+                </div>
             </div>
         </div>
     );

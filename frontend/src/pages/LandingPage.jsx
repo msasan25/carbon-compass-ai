@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 function LandingPage() {
     return (
         <div style={container}>
@@ -8,8 +9,10 @@ function LandingPage() {
                 <p style={subtitle}>
                     Understand your food and transport impact in seconds.
                 </p>
-
-                <button style={button}>Get Started</button>
+                <Link to="/dashboard">
+                    <button style={button}>Get Started</button>
+                </Link>
+                
             </div>
 
             <div style={section}>
