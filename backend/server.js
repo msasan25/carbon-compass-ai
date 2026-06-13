@@ -68,6 +68,9 @@ Rules:
     
       
 });
+app.get("/", (req, res) => {
+    res.send("EcoPup Backend Running 🚀");
+});
 
 app.listen(5000, () => {
     console.log("Backend running on http://localhost:5000");
